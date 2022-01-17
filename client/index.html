@@ -31,18 +31,14 @@
         $("#unitPrice").text("45.56")
         setTotalPrice()
       })
-
       const setTotalPrice = () => {
         const q = Number($("#quantity").text())
         const tirePrice = Number($("#unitPrice").text())
         console.log(q * tirePrice)
-        $("#totalPrice").text(q * tirePrice)
-      }
-      
+        $("#totalPrice").text(q * tirePrice)}
       $(document).ready(function () {
         const tax = $("h5:eq(1)").text().replace("$", "")
         $("#btn1").click(function () {})
-
         $("#addTireButton").click(function () {
           const newTireCount = Number($("#quantity").text()) + 1
           if (newTireCount >= 4) $("#addTireButton").prop("disabled", true)
@@ -52,26 +48,25 @@
           setTotalPrice()
         })
 
-        $("#removeTireButton").click(function () {
+                $("#removeTireButton")
+        .click(function () 
+        {
           const newTireCount = Number($("#quantity").text()) - 1
           if (newTireCount <= 1) $("#removeTireButton").prop("disabled", true)
-          $("#quantity").text(newTireCount)
-          $("#addTireButton").prop("disabled", false)
-          $("#quantity").trigger("contentchanged")
+            $("#quantity").text(newTireCount)
+            $("#addTireButton").prop("disabled", false)
+            $("#quantity").trigger("contentchanged")
           setTotalPrice()
         })
 
         $("#quantity").bind("contentchanged", function () {
-          console.log($("#quantity").text())
-        })
-
-        $("#Consumer_quantity").bind("contentchanged", function () {
-          $(".tireBrand").text($.get('/tire-brand', function(data, status) {
-            $("documentAsValue").text(data) 
+          console.log($("#quantity").text())})
+          $("#Consumer_quantity").bind("contentchanged", function () {
+                $(".tireBrand").text($.get('/tire-brand', function(data, status) {
+              $("documentAsValue").text(data) 
           })) 
         })
-
-        $("button").click(function () {
+                $("button").click(function () {
           const q = Number($("#quantity").text())
           const totalPrice = Number($("#totalPrice").text())
           var cwbalance = $("h5:eq(2)").text().slice(1, $("h5:eq(2)").text().length)
@@ -79,16 +74,16 @@
           if ($(this).attr("id") !== "btn1") {
             $.get("/registration", function (data, status) {
               $("#documentAsValue").text(data)
-              $(".defineDocumentStatus").text(status)
-            })
-          } else {
+              $(".defineDocumentStatus").text(status)})
+          } 
+          else {
             const tdf = $("h5:first").text().slice(1,$("h5:first").text().length)
-
             $.post(
               "/registration",
               { quantity: q, totalPrice, tireDisposalFee: tdf, tireTax: Number(tax), computerWheelBalance: cwbalance },
               function (data, status) {
-                alert(`Thank you for shopping with us`)
+                alert(`Thank you for shopping with us`
+                )
               }
             )
           }

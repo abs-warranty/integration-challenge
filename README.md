@@ -21,3 +21,19 @@ You should now have the app running on `http://localhost:8083`.
 **Before submitting your code, please make sure to lint and format it.**
 
 ## Challenge
+
+1. We'd like you to create your own modal component.
+
+   - Treat it like a component that you'll be integrating in a variety of websites. Your code should be good quality, even if the client's website is not. Readable, maintainable code is good. Your modal should interfere as little as possible with the client’s website code, and it should be reusable in other websites. Remember, the client may modify their website's javascript code in the future, and ideally your integration should be separated enough from their code such that the modal can continue working.
+   - Your modal's HTML, javascript, and CSS should be handwritten by you. Please use either vanilla JS or jQuery.
+   - Your modal will ask the user to pick between 3 different warranty options, or opt out of selecting a warranty.
+
+2. Once you have your modal, the client has asked you to integrate it into their website (`client/index.html`)
+   - Whenever a user clicks `Purchase`, your modal should appear.
+   - When they submit the modal, their selection should be attached to the data that is posted.
+
+## Tips
+
+- Try not to remove or change the client's code where possible, but instead focus on adding to it.
+- Adding classes or IDs to elements on the client's website is often ok if necessary to enable the javascript to access specific DOM elements.
+- On some clients' websites, you may need to work around the way they coded their app.

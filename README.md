@@ -27,6 +27,8 @@ You should now have the app running on `http://localhost:8083`.
    - Treat it like a component that you'll be integrating in a variety of websites. Your code should be good quality, even if the client's website is not. Readable, maintainable code is good. Your modal should interfere as little as possible with the client’s website code, and it should be reusable in other websites. Remember, the client may modify their website's javascript code in the future, and ideally your integration should be separated enough from their code such that the modal can continue working.
    - Your modal's HTML, JavaScript, and CSS should be handwritten by you in vanilla JS. Please avoid the use of 3rd party libraries.
    - Your modal will ask the user to pick between 3 different warranty options, or opt out of selecting a warranty.
+   - Here is a simple example modal where the three options could be selected when clicked.
+    ![alt text](modal.png)
 
 2. Once you have your modal, the client has asked you to integrate it into their website (`client/index.html`)
    - Whenever a user clicks `Purchase`, your modal should appear.

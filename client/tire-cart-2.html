@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title class="">Shopping Cart</title>
+  </head>
+  <body>
+    <div class="container-fluid col">
+      <div class="row">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark card">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+              <img
+                src="https://cdn.discounttire.com/sys-master/images/hc5/h31/8808331083806/DT_logo.svg"
+                alt=""
+                width="180"
+                height="70"
+              />
+            </a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#"
+                    >Home</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Tires</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Wheels</a>
+                </li>
+              </ul>
+              <form class="d-flex">
+                <input
+                  class="form-control me-2"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                />
+                <button class="btn btn-outline-success" type="submit">
+                  Search
+                </button>
+              </form>
+            </div>
+          </div>
+        </nav>
+        <h1 class="fw-light text-uppercase">Shopping Cart</h1>
+        <div class="col-lg-6 card rounded">
+          <div class="product">
+            <div class="product-image">
+              <img
+                src="https://dcadprod.azureedge.net/b2c-experience-production/attachments/ckkmaiz4701k601lmrvnzfve8-plt-ss1q.full.png"
+                alt="tire-pic"
+                style="width: 280px"
+              />
+            </div>
+            <div class="product-details">
+              <div class="product-title text-uppercase">
+                Michelin PilotSport 4S
+              </div>
+            </div>
+            <div class="product-price">125.99</div>
+            <div class="product-quantity">
+              <input type="number" value="1" min="1" />
+            </div>
+            <div class="product-removal">
+              <button class="remove-product btn-outline-danger">Remove</button>
+            </div>
+            <div class="product-line-price">125.99</div>
+          </div>
+          <div class="col-sm-6 mt-5 text-start d-grid gap-1">
+            <div class="form-check">
+              <h4 class="fw-light text-uppercase">
+                Road Hazard:Protect your tires
+              </h4>
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="defaultCheck1"
+              />
+              <label class="form-check-label" for="defaultCheck1">
+                Yes, I want to protect my tires.
+              </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="defaultCheck2"
+              />
+              <label class="form-check-label" for="defaultCheck2">
+                No, I do not not want to protect my tires.
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="col card rounded d-grid gap-2 text-center">
+          <div class="totals-item">
+            <label>Subtotal</label>
+            <div class="totals-value" id="cart-subtotal">129.99</div>
+          </div>
+          <div class="totals-item">
+            <label>Tax (8%)</label>
+            <div class="totals-value" id="cart-tax">10.08</div>
+          </div>
+          <div class="totals-item">
+            <label>Installation Fee</label>
+            <div class="totals-value" id="cart-install">22.00</div>
+          </div>
+          <div class="totals-item totals-item-total">
+            <label>Grand Total</label>
+            <div class="totals-value" id="cart-total">147.29</div>
+          </div>
+          <div>
+            <button class="btn btn-outline-info me-md-2" type="button">
+              Checkout
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        var taxRate = 0.08;
+        var installRate = 22.0;
+        var fadeTime = 300;
+
+        $(".product-quantity input").change(function () {
+          updateQuantity(this);
+        });
+
+        $(".product-removal button").click(function () {
+          removeItem(this);
+        });
+
+        function recalculateCart() {
+          var subtotal = 0;
+
+          $(".product").each(function () {
+            subtotal += parseFloat(
+              $(this).children(".product-line-price").text()
+            );
+          });
+
+          var tax = subtotal * taxRate;
+          var install = subtotal > 0 ? installRate : 0;
+          var total = subtotal + tax + install;
+
+          $(".totals-value").fadeOut(fadeTime, function () {
+            $("#cart-subtotal").html(subtotal.toFixed(2));
+            $("#cart-tax").html(tax.toFixed(2));
+            $("#cart-install").html(install.toFixed(2));
+            $("#cart-total").html(total.toFixed(2));
+            if (total == 0) {
+              $(".checkout").fadeOut(fadeTime);
+            } else {
+              $(".checkout").fadeIn(fadeTime);
+            }
+            $(".totals-value").fadeIn(fadeTime);
+          });
+        }
+
+        function updateQuantity(quantityInput) {
+          var productRow = $(quantityInput).parent().parent();
+          var price = parseFloat(productRow.children(".product-price").text());
+          var quantity = $(quantityInput).val();
+          var linePrice = price * quantity;
+
+          productRow.children(".product-line-price").each(function () {
+            $(this).fadeOut(fadeTime, function () {
+              $(this).text(linePrice.toFixed(2));
+              recalculateCart();
+              $(this).fadeIn(fadeTime);
+            });
+          });
+        }
+
+        function removeItem(removeButton) {
+          var productRow = $(removeButton).parent().parent();
+          productRow.slideUp(fadeTime, function () {
+            productRow.remove();
+            recalculateCart();
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

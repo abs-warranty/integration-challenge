@@ -20,7 +20,7 @@
           <div class="container-fluid">
             <a class="navbar-brand" href="#">
               <img
-                src="https://cdn.discounttire.com/sys-master/images/hc5/h31/8808331083806/DT_logo.svg"
+                src="https://media.istockphoto.com/photos/winter-tire-picture-id1180080141?k=20&m=1180080141&s=612x612&w=0&h=SUVTrBThbAIg5weu3pr2zdJLoxX2hFPnsO9dj44YjKc="
                 alt=""
                 width="180"
                 height="70"
@@ -136,7 +136,11 @@
             <div class="totals-value" id="cart-total">147.29</div>
           </div>
           <div>
-            <button class="btn btn-outline-info me-md-2" type="button">
+            <button
+              id="checkout"
+              class="btn btn-outline-info me-md-2"
+              type="button"
+            >
               Checkout
             </button>
           </div>
@@ -149,6 +153,24 @@
         var taxRate = 0.08;
         var installRate = 22.0;
         var fadeTime = 300;
+
+        $("#checkout").click(function () {
+          const { tax, total, install } = recalculateCart();
+          console.log("checkout!");
+          $.post(
+            "/registration",
+            {
+              quantity: updateQuantity,
+              totalPrice: total,
+              tireDisposalFee: 0,
+              tax: Number(tax),
+              computerWheelBalance: install,
+            },
+            function (data, status) {
+              alert(`Thank you for shopping with us`);
+            }
+          );
+        });
 
         $(".product-quantity input").change(function () {
           updateQuantity(this);
@@ -183,6 +205,7 @@
             }
             $(".totals-value").fadeIn(fadeTime);
           });
+          return { tax, total, install };
         }
 
         function updateQuantity(quantityInput) {

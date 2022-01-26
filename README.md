@@ -6,7 +6,7 @@
 2. [Create a new repository](https://github.com/new) called `integration-challenge` and set it to Private.
 3. Clone this repository. `git clone https://github.com/abs-warranty/integration-challange.git`
 4. `cd` into the cloned integration-challenge repo and add your private repository as a remote, so you can push to it. `git remote add upstream git@github.com:YOUR_USERNAME/integration-challenge.git`
-5. Create a new branch off of the `integration-challenge` repo where you will choose one of 2 integration challenges, and make your code changes. Open a PR to the `master` branch once you're done. `get checkout -b challenge-1 or challenge-2`
+5. Create a new branch off of the `integration-challenge` repo where you will choose one of 2 integration challenges, and make your code changes. Open a PR to the `master` branch once you're done. `git checkout -b challenge-1 or challenge-2`
 6. After you have finished coding one of the integration challenge options, and you're ready to push your code to your branch, make sure to do `git push upstream challenge-1 or challenge-2`.
 
 Make sure you have Node.js and `yarn` installed globally, then start the repo:
